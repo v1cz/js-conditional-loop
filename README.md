@@ -1,60 +1,43 @@
-# js-conditional-loop
-#introduces un correo
-#lo añandes a una lista 
-#recorres la lista y eliminas los que no acaban en @uji.es for 
-#con lo que queda haces un while que recorra la lista y diga el año de matrícula while 
+# Reto: misma lógica, otro lenguaje
 
-prompt:
-tengo que hacer un programa en javaScript. mi idea: 
-introducimos correos en una lista. luego con un bucle for la recorremos y todos los que NO acaben en @uji.es los eliminamos de la lista (aquí usamos el for)
-después con un while la volvemos a recorrer y tenemos que decir en qué año se matriculó cada alumno. para esto sabemos que si eres al405638@uji.es te matricuaste en el 2020, si tienes al415538@uji.es te matriculaste en 2021, si tienes al 425174@uji.es te matricuaste en 2022
+**Grupo 9:** María Sarrió Sánchez · Victor Tikhomirov Lemekha
+**Lenguaje:** JavaScript
+**Reto:** Bucles
 
+## Qué hace el programa (`correos.js`)
 
+1. Tiene una lista de correos.
+2. Con un **`for`** la recorre y se queda solo con los que acaban en `@uji.es`.
+3. Con un **`while`** recorre los que quedan y dice el año de matrícula:
+   `al40…` → 2020, `al41…` → 2021, `al42…` → 2022.
 
+Para ejecutarlo (opcional): `node correos.js`
 
-// 1. Lista inicial de correos (incluye válidos y no válidos)
-const correos = [
-  "al405638@uji.es",
-  "usuario@gmail.com",
-  "al415538@uji.es",
-  "profesor@yahoo.es",
-  "al425174@uji.es",
-  "estudiante@hotmail.com"
-];
+## Preguntas
 
-console.log("--- Lista original ---");
-console.log(correos);
+**¿Cómo se declaran las variables?**
+Con `let` (si su valor va a cambiar) o `const` (si no cambia). En Python solo se escribe el nombre.
 
-// 2. Bucle FOR: eliminar los que NO terminen en @uji.es
-// TRUCO IMPORTANTE: Al eliminar elementos de un array con .splice(), 
-// es mejor recorrerlo de atrás hacia adelante para no saltarse posiciones.
-for (let i = correos.length - 1; i >= 0; i--) {
-  if (!correos[i].endsWith("@uji.es")) {
-    correos.splice(i, 1); // Elimina 1 elemento en la posición i
-  }
-}
+```js
+let i = 0;
+const correos = ["a@uji.es"];
+```
 
-console.log("\n--- Lista filtrada (solo @uji.es) ---");
-console.log(correos);
+**¿Cómo se delimitan los bloques de código?**
+Con llaves `{ }`. En Python se hace con `:` y la sangría (indentación).
 
-// 3. Bucle WHILE: calcular el año de matrícula
-console.log("\n--- Años de matrícula ---");
+**¿Qué cambia en la sintaxis respecto a Python?**
 
-let indice = 0;
+| Python | JavaScript |
+|---|---|
+| `for correo in correos:` | `for (const correo of correos) { }` |
+| `while i < len(lista):` | `while (i < lista.length) { }` |
+| `i += 1` | `i++` |
+| `print(...)` | `console.log(...)` |
+| `lista.append(x)` | `lista.push(x)` |
+| `texto.endswith("x")` | `texto.endsWith("x")` |
 
-while (indice < correos.length) {
-  const correoActual = correos[indice];
+Además, en JavaScript las condiciones van entre paréntesis `( )` y las líneas suelen acabar en `;`.
 
-  // Extraemos los dos dígitos después de 'al' (posiciones 2 y 3)
-  // Ej: de "al405638@uji.es", toma "40"
-  const codigoStr = correoActual.slice(2, 4);
-  const codigoNum = parseInt(codigoStr, 10);
-
-  // Relación: 40 -> 2020, 41 -> 2021, 42 -> 2022
-  // Año = 2000 + (código - 20)
-  const anio = 2000 + (codigoNum - 20);
-
-  console.log(`El alumno con correo ${correoActual} se matriculó en el año ${anio}.`);
-
-  indice++; // Incrementamos el contador para evitar un bucle infinito
-}
+**¿Qué parte de la lógica se mantiene igual?**
+Toda: el `for` recorre cada elemento de la lista, el `while` repite mientras la condición sea verdadera y hay que aumentar el contador para que no sea infinito. El `if/else` decide igual que en Python.
